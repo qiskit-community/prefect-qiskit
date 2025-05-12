@@ -29,10 +29,10 @@ circ.measure_all()
 
 # Define Primitive
 primitive = BackendSamplerV2(backend=backend)
-pub = (circuit, )
+pubs = [(circuit, )]
 
 # Execute
-job = primitive.run([pub])
+job = primitive.run(pubs)
 result = job.result()
 ```
 
@@ -42,8 +42,10 @@ As quantum computing technology advances, large-scale experiments are becoming m
 Given the high cost of quantum computation, it's prudent to implement robust execution practices at the application level, particularly for large experiments.
 
 To add robustness and scalability to your quantum computing workflow, integrating a cloud-native workflow orchestrator, such as Prefect, is a good option. 
+Prefect offers a framework for [third-party integration](https://docs.prefect.io/integrations/integrations), 
+which include, for example, [AWS](https://docs.prefect.io/integrations/prefect-aws), [Azure](https://docs.prefect.io/integrations/prefect-azure), and [GCP](https://docs.prefect.io/integrations/prefect-gcp).
 
-With Prefect, you can easily turn your existing codebase into a workflow.
+With Prefect, you can easily turn your existing codebase into a quantum computing workflow.
 For example, a common programming pattern in quantum workflow, called [Qiskit Pattern](https://docs.quantum.ibm.com/guides/intro-to-patterns), may look as below with the Prefect syntax.
 
 ```python
@@ -78,20 +80,6 @@ def experiment(**params):
     # Qiskit Pattern: Post-Processing
     data = post_processing(result)
 ```
-
-
-Prefect offers a framework for [third-party integration](https://docs.prefect.io/integrations/integrations), 
-which include, for example, [AWS](https://docs.prefect.io/integrations/prefect-aws), [Azure](https://docs.prefect.io/integrations/prefect-azure), and [GCP](https://docs.prefect.io/integrations/prefect-gcp).
-Using Prefect for workflow orchestration offers several advantages:
-
-* Ease of Integration:
-  Prefect integrates seamlessly with various third-party services, making it easy to incorporate into existing workflows.
-
-* Scalability:
-  Prefect can handle workflows of any size, from small experiments to large-scale computations.
-
-* Robust Error Handling:
-  Prefect's checkpoint and retry mechanisms ensure that workflows can recover from failures and continue execution.
 
 ## Prefect Qiskit Integration
 
