@@ -1,0 +1,55 @@
+site_name: Prefect Qiskit Docs
+site_description: "Integration of Qiskit Primitive into Prefect"
+repo_url: https://github.com/qiskit-community/prefect-qiskit
+repo_name: prefect-qiskit
+
+docs_dir: docs
+markdown_extensions: 
+  - admonition
+  - attr_list
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      linenums_style: pymdownx-inline
+nav:
+  - Overview: index.md
+  - Tutorials: 
+    - Getting Started: tutorials/01_getting_started.md
+  - Contributing: contribution.md
+  - API Reference: reference.md
+theme: 
+  name: material
+  language: en
+  icon:
+    repo: fontawesome/brands/github
+  features:
+      - content.code.copy
+      - content.code.annotate
+      - search.highlight
+      - search.suggest
+      - navigation.instant
+      - navigation.tabs
+      - navigation.top
+      - navigation.sections
+      - toc.integrate
+  font:
+    text: "Inter, sans-serif"
+    code: "Source Code Pro, monospace"
+plugins: 
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths:
+            - prefect_qiskit
+          options:
+            docstring_style: google
+            show_root_heading: true
+            show_root_full_path: true
+            show_source: false
+            separate_signature: true
+            heading_level: 2
+watch:
+  - mkdocs.yml
+  - prefect_qiskit

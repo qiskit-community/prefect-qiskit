@@ -1,0 +1,1 @@
+{"devices": [{"name": "test_eagle_us-east", "status": {"name": "online", "reason": "available"}, "qubits": 127, "processor_type": {"family": "Eagle", "revision": "3"}, "queue_length": 1, "performance_metrics": {"two_q_error_best": {"gate": "ecr", "qubits": [96, 95], "unit": "", "value": 0.006666667}, "two_q_error_layered": {"unit": "", "value": 0.018392034}}}]}
