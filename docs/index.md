@@ -36,15 +36,10 @@ job = primitive.run([pub])
 result = job.result()
 ```
 
-## Quantum Computation
+## Prefect for Quantum Computing
 
 As quantum computing technology advances, large-scale experiments are becoming more common. These experiments often involve repeated job execution on quantum processors, with readout data being processed remotely at scale.
-
-Quantum computers, compared to conventional ones, still experience higher operation errors and occasional failures due to their complex control systems.
-
 Given the high cost of quantum computation, it's prudent to implement robust execution practices at the application level, particularly for large experiments.
-
-## Prefect
 
 To add robustness and scalability to your quantum computing workflow, integrating a cloud-native workflow orchestrator, such as Prefect, is a good option. 
 
@@ -104,7 +99,11 @@ This plugin provides integration for quantum computation through the Primitive m
 With this plugin, the Primitive execution in the example code may be simplified as below:
 
 ```python
-result = runtime.sampler([pub])
+from prefect_qiskit import QuantumRuntime
+
+runtime = QuantumRuntime.load("my-runtime")
+...
+result = runtime.sampler(pubs)
 ```
 
 Since our runtime is an asynchronous implementation, you can efficiently sample multiple PUBs in parallel:
