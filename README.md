@@ -12,7 +12,7 @@ fatal errors can disrupt the entire workflow.
 This library enhances software fault tolerance 
 by implementing primitive execution within a Prefect workflow.
 
-For more details, visit the full documentation [here]().
+For more details, visit the full documentation [here](https://qiskit-community.github.io/prefect-qiskit/).
 
 ## Installation
 
@@ -118,7 +118,7 @@ prefect block register -m prefect_qiskit.vendors
 
 ## Contribution Guidelines
 
-If you'd like to contribute to Prefect Qiskit, please take a look at our [contribution guidelines](). By participating, you are expected to uphold our code of conduct.
+If you'd like to contribute to Prefect Qiskit, please take a look at our [contribution guidelines](https://qiskit-community.github.io/prefect-qiskit/contribution/). By participating, you are expected to uphold our code of conduct.
 
 We use [GitHub issues](https://github.com/qiskit-community/prefect-qiskit/issues) for tracking requests and bugs.
 For Prefect workflow, open issues and PRs against [PrefectHQ/prefect](https://github.com/PrefectHQ/prefect) instead of this repository.
