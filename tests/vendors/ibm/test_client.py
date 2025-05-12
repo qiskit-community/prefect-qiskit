@@ -115,7 +115,7 @@ def test_invalid_crn() -> None:
         )
 
 
-@pytest.mark.asyncio(loop_scope="function")
+@pytest.mark.asyncio
 async def test_get_request_error(
     mock_http_response: MockHttpRespSetup,
 ) -> None:
@@ -158,7 +158,7 @@ async def test_get_request_error(
     assert exc_info.value.retry is True
 
 
-@pytest.mark.asyncio(loop_scope="function")
+@pytest.mark.asyncio
 async def test_invalid_primitive_inputs(
     mock_http_response: MockHttpRespSetup,
     bell_circ: QuantumCircuit,
@@ -195,7 +195,7 @@ async def test_invalid_primitive_inputs(
     assert exc_info.value.retry is False
 
 
-@pytest.mark.asyncio(loop_scope="function")
+@pytest.mark.asyncio
 async def test_primitive_inputs_sampler(
     mock_http_response: MockHttpRespSetup,
     bell_circ: QuantumCircuit,
@@ -231,7 +231,7 @@ async def test_primitive_inputs_sampler(
     assert job_id == "test-job-id-123"
 
 
-@pytest.mark.asyncio(loop_scope="function")
+@pytest.mark.asyncio
 async def test_primitive_inputs_estimator(
     mock_http_response: MockHttpRespSetup,
     bell_circ: QuantumCircuit,
@@ -267,7 +267,7 @@ async def test_primitive_inputs_estimator(
     assert job_id == "test-job-id-123"
 
 
-@pytest.mark.asyncio(loop_scope="function")
+@pytest.mark.asyncio
 async def test_job_fail_1010(
     mock_http_response: MockHttpRespSetup,
 ) -> None:
@@ -302,7 +302,7 @@ async def test_job_fail_1010(
     )
 
 
-@pytest.mark.asyncio(loop_scope="function")
+@pytest.mark.asyncio
 async def test_job_fail_9999(
     mock_http_response: MockHttpRespSetup,
 ) -> None:

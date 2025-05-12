@@ -11,7 +11,6 @@
 # under the License.
 """Test primitive runner."""
 
-import asyncio
 import json
 import time
 from datetime import datetime
@@ -30,7 +29,8 @@ from prefect_qiskit.vendors.qiskit_aer import QiskitAerCredentials
 from prefect_qiskit.vendors.qiskit_aer.client import QiskitAerClient
 
 
-def test_retry_until_success(
+@pytest.mark.asyncio
+async def test_retry_until_success(
     mocker: MockerFixture,
     aer_credentials_2q: QiskitAerCredentials,
     bell_circuit_pub: QuantumCircuit,
@@ -51,7 +51,8 @@ def test_retry_until_success(
         ],
     )
 
-    coro = run_primitive.with_options(
+    # API will intentionally fail once
+    result = await run_primitive.with_options(
         retries=2,
         retry_delay_seconds=1,
     )(
@@ -62,9 +63,6 @@ def test_retry_until_success(
         enable_analytics=False,
     )
 
-    # API will intentionally fail once
-    result = asyncio.run(coro)
-
     assert result[0].data.meas.get_counts() == {"00": 512, "11": 512}
 
     # Check runtime API is called twice by Prefect workflow
@@ -73,7 +71,8 @@ def test_retry_until_success(
     assert QiskitAerClient.get_primitive_result.call_count == 1  # type: ignore[attr-defined]
 
 
-def test_unretryable(
+@pytest.mark.asyncio
+async def test_unretryable(
     mocker: MockerFixture,
     aer_credentials_2q: QiskitAerCredentials,
     bell_circuit_pub: QuantumCircuit,
@@ -90,25 +89,24 @@ def test_unretryable(
         side_effect=RuntimeJobFailure("unretryable failure", job_id="test_job_123", retry=False),
     )
 
-    coro = run_primitive.with_options(
-        retries=2,
-        retry_delay_seconds=1,
-    )(
-        primitive_blocs=[bell_circuit_pub],
-        program_type="sampler",
-        resource_name="aer_simulator",
-        credentials=aer_credentials_2q,
-        enable_analytics=False,
-    )
-
     with pytest.raises(RuntimeJobFailure):
-        asyncio.run(coro)
+        await run_primitive.with_options(
+            retries=2,
+            retry_delay_seconds=1,
+        )(
+            primitive_blocs=[bell_circuit_pub],
+            program_type="sampler",
+            resource_name="aer_simulator",
+            credentials=aer_credentials_2q,
+            enable_analytics=False,
+        )
 
     # Don't submit unretryable job more than once
     assert QiskitAerClient.run_primitive.call_count == 1  # type: ignore[attr-defined]
 
 
-def test_not_infinite_loop(
+@pytest.mark.asyncio
+async def test_not_infinite_loop(
     mocker: MockerFixture,
     aer_credentials_2q: QiskitAerCredentials,
     bell_circuit_pub: QuantumCircuit,
@@ -125,25 +123,24 @@ def test_not_infinite_loop(
         side_effect=RuntimeJobFailure("retryable failure", job_id="test_job_123", retry=True),
     )
 
-    coro = run_primitive.with_options(
-        retries=2,
-        retry_delay_seconds=1,
-    )(
-        primitive_blocs=[bell_circuit_pub],
-        program_type="sampler",
-        resource_name="aer_simulator",
-        credentials=aer_credentials_2q,
-        enable_analytics=False,
-    )
-
     with pytest.raises(RuntimeJobFailure):
-        asyncio.run(coro)
+        await run_primitive.with_options(
+            retries=2,
+            retry_delay_seconds=1,
+        )(
+            primitive_blocs=[bell_circuit_pub],
+            program_type="sampler",
+            resource_name="aer_simulator",
+            credentials=aer_credentials_2q,
+            enable_analytics=False,
+        )
 
     # Retry until retry limit
     assert QiskitAerClient.run_primitive.call_count > 1  # type: ignore[attr-defined]
 
 
-def test_retry_on_task_timeout(
+@pytest.mark.asyncio
+async def test_retry_on_task_timeout(
     mocker: MockerFixture,
     aer_credentials_2q: QiskitAerCredentials,
     bell_circuit_pub: QuantumCircuit,
@@ -163,7 +160,7 @@ def test_retry_on_task_timeout(
         side_effect=lambda _: "COMPLETED" if time.time() - test_start > 10 else "QUEUED",
     )
 
-    coro = run_primitive.with_options(
+    result = await run_primitive.with_options(
         retries=2,
         retry_delay_seconds=0,
         timeout_seconds=6,
@@ -175,15 +172,14 @@ def test_retry_on_task_timeout(
         enable_analytics=False,
     )
 
-    result = asyncio.run(coro)
-
     assert result[0].data.meas.get_counts() == {"00": 512, "11": 512}
 
     # Check runtime API is called twice by Prefect workflow due to timeout
     assert QiskitAerClient.run_primitive.call_count == 2  # type: ignore[attr-defined]
 
 
-def test_job_metrics(
+@pytest.mark.asyncio
+async def test_job_metrics(
     mocker: MockerFixture,
     aer_credentials_2q: QiskitAerCredentials,
     bell_circuit_pub: QuantumCircuit,
@@ -217,7 +213,7 @@ def test_job_metrics(
         ),
     )
 
-    coro = run_primitive.with_options(
+    await run_primitive.with_options(
         task_run_name="test_job_metrics",
         tags=["tag1", "tag2"],
     )(
@@ -228,8 +224,6 @@ def test_job_metrics(
         enable_analytics=True,
         options=test_options,
     )
-
-    asyncio.run(coro)
 
     with get_client(sync_client=True) as client:
         artifacts = client.read_artifacts(

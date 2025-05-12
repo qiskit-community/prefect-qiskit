@@ -11,8 +11,6 @@
 # under the License.
 """Test primitive workflow with QuantumRuntime."""
 
-import asyncio
-from dataclasses import asdict
 from pathlib import Path
 
 import pytest
@@ -21,8 +19,6 @@ from prefect import get_client, task
 from prefect.client.schemas.filters import ArtifactFilter, TaskRunFilter
 from pytest_mock import MockerFixture
 from qiskit.circuit import QuantumCircuit
-from qiskit.primitives.backend_estimator_v2 import Options as EstimatorOptions
-from qiskit.primitives.backend_sampler_v2 import Options as SamplerOptions
 from qiskit.primitives.containers import PrimitiveResult
 from qiskit.quantum_info.operators import SparsePauliOp
 from qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager
@@ -79,10 +75,13 @@ def test_sampler(
         credentials=aer_credentials_2q,
         enable_job_analytics=False,
     )
-    options = SamplerOptions(default_shots=10000, seed_simulator=1234)
+    options = {
+        "default_shots": 10000,
+        "seed_simulator": 1234,
+    }
     pm = generate_preset_pass_manager(optimization_level=2, target=runtime.get_target())
 
-    result = runtime.sampler(pm.run([bell_circ, hh_circ]), options=asdict(options))
+    result = runtime.sampler(pm.run([bell_circ, hh_circ]), options=options)
 
     assert_sampler_fidelity(result[0], {"00": 1, "11": 1})
     assert_sampler_fidelity(result[1], {"00": 1, "01": 1, "10": 1, "11": 1})
@@ -100,17 +99,19 @@ def test_estimator(
         credentials=aer_credentials_2q,
         enable_job_analytics=False,
     )
-    options = EstimatorOptions(seed_simulator=1234)
+    options = {
+        "seed_simulator": 1234,
+    }
     pm = generate_preset_pass_manager(optimization_level=2, target=runtime.get_target())
     isa_qc = pm.run(bell_circ)
     isa_op = op.apply_layout(isa_qc.layout)
 
-    result = runtime.estimator([(isa_qc, isa_op)], options=asdict(options))
+    result = runtime.estimator([(isa_qc, isa_op)], options=options)
 
     assert float(result[0].data.evs) == pytest.approx(1.0, abs=0.1)
 
 
-@pytest.mark.asyncio(loop_scope="function")
+@pytest.mark.asyncio
 async def test_sampler_mult_async(
     aer_credentials_2q: QiskitAerCredentials,
     bell_circ: QuantumCircuit,
@@ -122,11 +123,14 @@ async def test_sampler_mult_async(
         credentials=aer_credentials_2q,
         enable_job_analytics=False,
     )
-    options = SamplerOptions(default_shots=10000, seed_simulator=1234)
+    options = {
+        "default_shots": 10000,
+        "seed_simulator": 1234,
+    }
     pm = generate_preset_pass_manager(optimization_level=2, target=await runtime.get_target())
 
-    result1 = await runtime.sampler(pm.run([bell_circ]), options=asdict(options))
-    result2 = await runtime.sampler(pm.run([hh_circ]), options=asdict(options))
+    result1 = await runtime.sampler(pm.run([bell_circ]), options=options)
+    result2 = await runtime.sampler(pm.run([hh_circ]), options=options)
 
     assert_sampler_fidelity(result1[0], {"00": 1, "11": 1})
     assert_sampler_fidelity(result2[0], {"00": 1, "01": 1, "10": 1, "11": 1})
@@ -142,12 +146,15 @@ def test_sampler_custom_tags(
         credentials=aer_credentials_2q,
         enable_job_analytics=True,
     )
-    options = SamplerOptions(default_shots=10000, seed_simulator=1234)
+    options = {
+        "default_shots": 10000,
+        "seed_simulator": 1234,
+    }
     pm = generate_preset_pass_manager(optimization_level=2, target=runtime.get_target())
 
     runtime.sampler(
         pm.run([bell_circ]),
-        options=asdict(options),
+        options=options,
         tags=["test_sampler_custom_tags"],
     )
 
@@ -176,19 +183,22 @@ def test_sampler_cache(
         enable_job_analytics=False,
         execution_cache=True,
     )
-    options = SamplerOptions(default_shots=10000, seed_simulator=1234)
+    options = {
+        "default_shots": 10000,
+        "seed_simulator": 1234,
+    }
     pm = generate_preset_pass_manager(optimization_level=2, target=runtime.get_target())
 
     result1 = runtime.sampler(
         pm.run([bell_circ]),
-        options=asdict(options),
+        options=options,
     )
     assert spy.call_count == 1
 
     # This execution must be cached
     result2 = runtime.sampler(
         pm.run([bell_circ]),
-        options=asdict(options),
+        options=options,
     )
     assert spy.call_count == 1
     assert result1[0].data.meas.get_counts() == result2[0].data.meas.get_counts()
@@ -198,7 +208,7 @@ def test_sampler_cache(
 
     runtime.sampler(
         pm.run([bell_circ]),
-        options=asdict(options),
+        options=options,
     )
     assert spy.call_count == 2
 
@@ -214,10 +224,13 @@ def test_sampler_as_task(
         runtime: QuantumRuntime,
         circuit: QuantumCircuit,
     ) -> PrimitiveResult:
-        options = SamplerOptions(default_shots=10000, seed_simulator=1234)
+        options = {
+            "default_shots": 10000,
+            "seed_simulator": 1234,
+        }
         pm = generate_preset_pass_manager(optimization_level=2, target=runtime.get_target())
 
-        return runtime.sampler(pm.run([circuit]), options=asdict(options))
+        return runtime.sampler(pm.run([circuit]), options=options)
 
     runtime = QuantumRuntime(
         resource_name="aer_simulator",
@@ -228,7 +241,8 @@ def test_sampler_as_task(
     assert_sampler_fidelity(result[0], {"00": 1, "11": 1})
 
 
-def test_result_retrieve(
+@pytest.mark.asyncio
+async def test_result_retrieve(
     mocker: MockerFixture,
     aer_credentials_2q: QiskitAerCredentials,
     bell_circ: QuantumCircuit,
@@ -246,15 +260,19 @@ def test_result_retrieve(
         credentials=aer_credentials_2q,
         enable_job_analytics=False,
     )
-    options = SamplerOptions(default_shots=10000, seed_simulator=1234)
-    pm = generate_preset_pass_manager(optimization_level=2, target=runtime.get_target())
+    options = {
+        "default_shots": 10000,
+        "seed_simulator": 1234,
+    }
+    pm = generate_preset_pass_manager(optimization_level=2, target=await runtime.get_target())
 
-    result = runtime.sampler(pm.run([bell_circ]), options=asdict(options))[0]
+    result = (await runtime.sampler(pm.run([bell_circ]), options=options))[0]
 
     job = PrimitiveJobRun(
         job_id="test_job_123",
         credentials=aer_credentials_2q,
     )
-    result_retrieved = asyncio.run(job.fetch_result())[0]
+    # This method is async only. The test is async because of this.
+    result_retrieved = (await job.fetch_result())[0]
 
     assert result.data.meas.get_counts() == result_retrieved.data.meas.get_counts()

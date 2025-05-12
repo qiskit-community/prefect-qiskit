@@ -78,7 +78,7 @@ def test_transpile_with_runtime(
         pytest.param(["rz", "sx", "cx"], "bell_isa_cx", id="cx-basis"),
     ],
 )
-@pytest.mark.asyncio(loop_scope="function")
+@pytest.mark.asyncio
 async def test_transpile_with_runtime_async(
     vcirc: QuantumCircuit,
     request: pytest.FixtureRequest,

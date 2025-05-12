@@ -50,7 +50,7 @@ dependencies = [
 
 [project.urls]
 Homepage = "https://github.com/qiskit-community/prefect-qiskit"
-# Documentation = ""
+Documentation = "https://qiskit-community.github.io/prefect-qiskit/"
 
 [project.optional-dependencies]
 dev = [
@@ -60,6 +60,7 @@ dev = [
     "pytest-mock==3.14.0",
     "pytest-asyncio>=0.25.3",
     "pytest-mypy-plugins>=3.2.0",
+    "pytest-timeout>=2.3.1",
     "ruff==0.9.6",
     "mypy==1.15.0",
 ]
@@ -102,10 +103,11 @@ exclude = ["tests/*"]
 
 [tool.pytest.ini_options]
 addopts = "--mypy-only-local-stub"
+pythonpath = ["tests"]
 testpaths = ["tests"]
 asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "function"
-pythonpath = ["tests"]
+timeout = 90
 
 [tool.coverage.run]
 branch = true
