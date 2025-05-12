@@ -79,9 +79,6 @@ version_scheme = "guess-next-dev"
 local_scheme = "release-branch-semver"
 write_to = "prefect_qiskit/VERSION.txt"
 
-[tool.codespell]
-skip = ".github/workflows/*.yml"
-
 [tool.ruff]
 line-length = 120
 target-version = "py310"

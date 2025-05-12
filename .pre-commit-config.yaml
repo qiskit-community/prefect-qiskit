@@ -28,4 +28,6 @@ repos:
     hooks:
       - id: codespell
         name: Spell Checker (codespell)
-        args: ["--ignore-words=.codespell-ignore"]
+        args:
+          - "--ignore-words=.codespell-ignore"
+          - "--skip=.github/workflows/*.yml"
