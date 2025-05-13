@@ -23,10 +23,15 @@ it should be considered a private class and
 may be subject to future API changes without deprecation.
 """
 
+from typing import Union
+
 from .ibm_quantum.credentials import IBMQuantumCredentials
 from .qiskit_aer.credentials import QiskitAerCredentials
 
-QuantumCredentialsT = IBMQuantumCredentials | QiskitAerCredentials
+QuantumCredentialsT = Union[  # noqa: UP007
+    IBMQuantumCredentials,
+    QiskitAerCredentials,
+]
 
 __all__ = [
     "IBMQuantumCredentials",
