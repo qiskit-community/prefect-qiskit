@@ -11,7 +11,14 @@
 # under the License.
 """Prefect integration to manage execution of Qiskit Primitives."""
 
+from importlib.metadata import PackageNotFoundError, version
+
 from .runtime import QuantumRuntime
+
+try:
+    __version__ = version("prefect-qiskit")
+except PackageNotFoundError:
+    pass
 
 __all__ = [
     "QuantumRuntime",

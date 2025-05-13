@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=42", "setuptools_scm[toml]>=7.1", "wheel"]
+requires = ["setuptools>=64", "setuptools-scm>=8"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -75,10 +75,7 @@ include-package-data = true
 zip-safe = false
 
 [tool.setuptools_scm]
-root = "."
 version_scheme = "guess-next-dev"
-local_scheme = "no-local-version"
-write_to = "prefect_qiskit/VERSION.txt"
 
 [tool.ruff]
 line-length = 120
