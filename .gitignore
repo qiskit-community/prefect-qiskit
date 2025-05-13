@@ -172,6 +172,3 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
-
-# Version file
-prefect_qiskit/VERSION.txt
