@@ -42,7 +42,7 @@ def bell_circ() -> QuantumCircuit:
 
 
 @pytest.fixture
-def aer_credentials_2q() -> QuantumCircuit:
+def aer_credentials_2q() -> QiskitAerCredentials:
     """Fixture to return Aer credentials with 2Q generic backend."""
     return QiskitAerCredentials(
         num_qubits=2,
