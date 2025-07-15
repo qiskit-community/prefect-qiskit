@@ -52,7 +52,7 @@ def current_folder_path(
     [
         pytest.param("sampler_pub", id="sampler_pub"),
         pytest.param("estimator_pub", id="estimator_pub"),
-        pytest.param("isa_pub", id="isa_pub"),
+        # pytest.param("isa_pub", id="isa_pub"),  # TODO: uncomment after 2.2.2 (see qiskit #14729)
     ],
 )
 def test_sampler_pub_hash(
