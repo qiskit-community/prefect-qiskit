@@ -96,7 +96,7 @@ class QiskitAerCredentials(CredentialsBlock):
         title="Apply Noise",
     )
 
-    coupling_map_type: Literal["full", "ring", "linear", "grid", "hexagonal", "heavy-hex", "heavy_square"] = Field(
+    coupling_map_type: Literal["full", "ring", "linear"] = Field(
         default="linear",
         description=(
             "Topology of coupling map. Actual connections are automatically generated from the selected topology."
@@ -131,26 +131,6 @@ class QiskitAerCredentials(CredentialsBlock):
                 )
             case "linear":
                 coupling_map = CouplingMap.from_line(
-                    num_qubits=self.num_qubits,
-                    bidirectional=True,
-                )
-            case "grid":
-                coupling_map = CouplingMap.from_grid(
-                    num_qubits=self.num_qubits,
-                    bidirectional=True,
-                )
-            case "hexagonal":
-                coupling_map = CouplingMap.from_hexagonal_lattice(
-                    num_qubits=self.num_qubits,
-                    bidirectional=True,
-                )
-            case "heavy-hex":
-                coupling_map = CouplingMap.from_heavy_hex(
-                    num_qubits=self.num_qubits,
-                    bidirectional=True,
-                )
-            case "heavy_square":
-                coupling_map = CouplingMap.from_heavy_square(
                     num_qubits=self.num_qubits,
                     bidirectional=True,
                 )
