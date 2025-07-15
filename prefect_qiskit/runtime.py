@@ -173,7 +173,6 @@ class QuantumRuntime(Block):
             "Cache primitive execution result in a local file system. "
             "A cache key is computed from the input Primitive Unified Blocs, options, and resource name. "
             "Overhead of the primitive operands evaluation is incurred. "
-            "[WARNING] Cache doesn't work as expected until Qiskit 2.1 release. See qiskit/#12963."
         ),
         title="Execution Cache",
     )
