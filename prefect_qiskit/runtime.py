@@ -57,9 +57,6 @@ class QuantumRuntime(Block):
     Prefect Block used to execute Qiskit Primitives on quantum computing resources.
     Quantum Runtime is a vendor agnostic implementation of primitive execution.
 
-    !!! WARNING
-        Cache doesn't work as expected until Qiskit 2.1 release. See qiskit/#12963.
-
     Attributes:
         resource_name:
             Name of a quantum computing resource available with your credentials.
@@ -176,7 +173,6 @@ class QuantumRuntime(Block):
             "Cache primitive execution result in a local file system. "
             "A cache key is computed from the input Primitive Unified Blocs, options, and resource name. "
             "Overhead of the primitive operands evaluation is incurred. "
-            "[WARNING] Cache doesn't work as expected until Qiskit 2.1 release. See qiskit/#12963."
         ),
         title="Execution Cache",
     )
@@ -347,7 +343,7 @@ class QuantumRuntime(Block):
             task_options = {
                 "cache_policy": CacheKeyFnPolicy(cache_key_fn=_primitive_cache),
                 "persist_result": True,
-                "result_serializer": "compressed/pickle",  # TODO Doesn't work due to setattr issue
+                "result_serializer": "compressed/pickle",
             }
         else:
             task_options = {

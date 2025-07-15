@@ -36,7 +36,7 @@ maintainers = [
 dependencies = [
     # Core dependencies
     "prefect",
-    "qiskit>=2.0",
+    "qiskit>=2.1",
     "aiohttp",
     "nest-asyncio",
     "typing_extensions",

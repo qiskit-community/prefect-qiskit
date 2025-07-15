@@ -166,15 +166,12 @@ def test_sampler_custom_tags(
     assert len(artifacts) == 1
 
 
-@pytest.mark.skip(reason="This test require qiskit/#12963")
 def test_sampler_cache(
     mocker: MockerFixture,
     aer_credentials_2q: QiskitAerCredentials,
     bell_circ: QuantumCircuit,
 ) -> None:
     """Test caching the primitive results."""
-    # TODO remove skip after Qiskit 2.1 is released
-
     spy = mocker.spy(QiskitAerClient, "run_primitive")
 
     runtime = QuantumRuntime(

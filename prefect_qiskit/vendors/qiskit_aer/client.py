@@ -12,8 +12,8 @@
 """Adaptor for Qiskit Aer simulator."""
 
 import asyncio
-import json
 import os
+import pickle
 import uuid
 from datetime import datetime
 from typing import Any, Literal
@@ -27,11 +27,6 @@ from qiskit.primitives.containers.estimator_pub import EstimatorPub
 from qiskit.primitives.containers.sampler_pub import SamplerPub
 from qiskit.providers.backend import BackendV2
 from qiskit.transpiler.target import Target
-
-# TODO: Remove this dependency after Qiskit 2.1.
-# This client should be unaware of IBM-specific implementation.
-# https://github.com/Qiskit/qiskit/pull/12963
-from qiskit_ibm_runtime.utils.json import RuntimeDecoder, RuntimeEncoder
 
 from prefect_qiskit.exceptions import RuntimeJobFailure
 from prefect_qiskit.models import JOB_STATUS, JobMetrics
@@ -145,7 +140,7 @@ class QiskitAerClient(LoggingMixin):
             job_status = DISK_CACHE[job_id]
         except KeyError as ex:
             raise RuntimeError(f"Job ID {job_id} is not found") from ex
-        return json.loads(job_status["result"], cls=RuntimeDecoder)
+        return pickle.loads(job_status["result"])
 
     async def get_job_status(
         self,
@@ -202,7 +197,7 @@ async def execute_primitive(
         result = job.result()
         job_status.update(
             {
-                "result": json.dumps(result, cls=RuntimeEncoder),
+                "result": pickle.dumps(result),
                 "status": "COMPLETED",
                 "finished": datetime.now(),
             }
