@@ -1,0 +1,3652 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Integration of Qiskit Primitive into Prefect">
+      
+      
+      
+      
+        <link rel="prev" href="../contribution/">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.13">
+    
+    
+      
+        <title>API Reference - Prefect Qiskit Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter,+sans-serif:300,300i,400,400i,700,700i%7CSource+Code+Pro,+monospace:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter, sans-serif";--md-code-font:"Source Code Pro, monospace"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#api-reference" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Prefect Qiskit Docs" class="md-header__button md-logo" aria-label="Prefect Qiskit Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Prefect Qiskit Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              API Reference
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/qiskit-community/prefect-qiskit" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    prefect-qiskit
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Overview
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../tutorials/01_getting_started/" class="md-tabs__link">
+          
+  
+  
+  Tutorials
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../contribution/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Contributing
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  API Reference
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Prefect Qiskit Docs" class="md-nav__button md-logo" aria-label="Prefect Qiskit Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Prefect Qiskit Docs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/qiskit-community/prefect-qiskit" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    prefect-qiskit
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Tutorials
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Tutorials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/01_getting_started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contribution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    API Reference
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    API Reference
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prefect_qiskit.runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      runtime
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="runtime">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prefect_qiskit.runtime.QuantumRuntime" class="md-nav__link">
+    <span class="md-ellipsis">
+      QuantumRuntime
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="QuantumRuntime">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prefect_qiskit.runtime.QuantumRuntime.async_estimator" class="md-nav__link">
+    <span class="md-ellipsis">
+      async_estimator
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefect_qiskit.runtime.QuantumRuntime.async_get_target" class="md-nav__link">
+    <span class="md-ellipsis">
+      async_get_target
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefect_qiskit.runtime.QuantumRuntime.async_sampler" class="md-nav__link">
+    <span class="md-ellipsis">
+      async_sampler
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefect_qiskit.runtime.QuantumRuntime.build_runner_task" class="md-nav__link">
+    <span class="md-ellipsis">
+      build_runner_task
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefect_qiskit.runtime.QuantumRuntime.estimator" class="md-nav__link">
+    <span class="md-ellipsis">
+      estimator
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefect_qiskit.runtime.QuantumRuntime.get_target" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_target
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefect_qiskit.runtime.QuantumRuntime.sampler" class="md-nav__link">
+    <span class="md-ellipsis">
+      sampler
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prefect_qiskit.vendors" class="md-nav__link">
+    <span class="md-ellipsis">
+      vendors
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="vendors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prefect_qiskit.vendors.IBMQuantumCredentials" class="md-nav__link">
+    <span class="md-ellipsis">
+      IBMQuantumCredentials
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IBMQuantumCredentials">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prefect_qiskit.vendors.IBMQuantumCredentials.get_client" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_client
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefect_qiskit.vendors.QiskitAerCredentials" class="md-nav__link">
+    <span class="md-ellipsis">
+      QiskitAerCredentials
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="QiskitAerCredentials">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prefect_qiskit.vendors.QiskitAerCredentials.get_client" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_client
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prefect_qiskit.primitives" class="md-nav__link">
+    <span class="md-ellipsis">
+      primitives
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="primitives">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prefect_qiskit.primitives.PrimitiveJob" class="md-nav__link">
+    <span class="md-ellipsis">
+      PrimitiveJob
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PrimitiveJob">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prefect_qiskit.primitives.PrimitiveJob.trigger" class="md-nav__link">
+    <span class="md-ellipsis">
+      trigger
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefect_qiskit.primitives.PrimitiveJobRun" class="md-nav__link">
+    <span class="md-ellipsis">
+      PrimitiveJobRun
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PrimitiveJobRun">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prefect_qiskit.primitives.PrimitiveJobRun.fetch_metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      fetch_metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefect_qiskit.primitives.PrimitiveJobRun.fetch_result" class="md-nav__link">
+    <span class="md-ellipsis">
+      fetch_result
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefect_qiskit.primitives.PrimitiveJobRun.wait_for_completion" class="md-nav__link">
+    <span class="md-ellipsis">
+      wait_for_completion
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefect_qiskit.primitives.run_primitive" class="md-nav__link">
+    <span class="md-ellipsis">
+      run_primitive
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prefect_qiskit.models" class="md-nav__link">
+    <span class="md-ellipsis">
+      models
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="models">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prefect_qiskit.models.JOB_STATUS" class="md-nav__link">
+    <span class="md-ellipsis">
+      JOB_STATUS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefect_qiskit.models.AsyncRuntimeClientInterface" class="md-nav__link">
+    <span class="md-ellipsis">
+      AsyncRuntimeClientInterface
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AsyncRuntimeClientInterface">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prefect_qiskit.models.AsyncRuntimeClientInterface.check_resource_available" class="md-nav__link">
+    <span class="md-ellipsis">
+      check_resource_available
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefect_qiskit.models.AsyncRuntimeClientInterface.get_job_metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_job_metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefect_qiskit.models.AsyncRuntimeClientInterface.get_job_status" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_job_status
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefect_qiskit.models.AsyncRuntimeClientInterface.get_primitive_result" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_primitive_result
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefect_qiskit.models.AsyncRuntimeClientInterface.get_resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_resources
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefect_qiskit.models.AsyncRuntimeClientInterface.get_target" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_target
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefect_qiskit.models.AsyncRuntimeClientInterface.run_primitive" class="md-nav__link">
+    <span class="md-ellipsis">
+      run_primitive
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefect_qiskit.models.JobMetrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      JobMetrics
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prefect_qiskit.exceptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      exceptions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="exceptions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prefect_qiskit.exceptions.RuntimeJobFailure" class="md-nav__link">
+    <span class="md-ellipsis">
+      RuntimeJobFailure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RuntimeJobFailure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prefect_qiskit.exceptions.RuntimeJobFailure.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      __init__
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="api-reference">API Reference</h1>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="prefect_qiskit.runtime" class="doc doc-heading">
+            <span class="doc doc-object-name doc-module-name">prefect_qiskit.runtime</span>
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+        <p>This module provides an abstraction layer for managing the execution of Qiskit Primitives.
+Execution is managed by a Prefect task behind the scenes, enhancing system error resilience.</p>
+<p>The runtime supports both synchronous and asynchronous execution of primitives.
+Asynchronous execution is particularly efficient for I/O-bound tasks,
+typical in client-server remote computing scenarios.</p>
+<p>Users must supply Prefect credential blocks for the specific vendor to run on the target hardware.</p>
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="prefect_qiskit.runtime.QuantumRuntime" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">QuantumRuntime</span>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="prefect.blocks.core.Block">Block</span></code></p>
+
+
+        <p>Prefect Block used to execute Qiskit Primitives on quantum computing resources.
+Quantum Runtime is a vendor agnostic implementation of primitive execution.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="prefect_qiskit.runtime.QuantumRuntime.resource_name">resource_name</span></code></td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Name of a quantum computing resource available with your credentials.
+Input value is validated and an error is raised when the resource name is not found.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="prefect_qiskit.runtime.QuantumRuntime.credentials">credentials</span></code></td>
+            <td>
+                  <code><span title="prefect_qiskit.vendors.QuantumCredentialsT">QuantumCredentialsT</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Credentials to access the quantum computing resource from a target vendor.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="prefect_qiskit.runtime.QuantumRuntime.enable_job_analytics">enable_job_analytics</span></code></td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Enable quantum job analytics.
+When analytics is enabled, each primitive execution will create
+a table artifact 'job-metrics' that reports various
+execution metrics the vendor provides as a job metadata.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="prefect_qiskit.runtime.QuantumRuntime.max_retry">max_retry</span></code></td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Maximum number of primitive execution retry on failure.
+Primitive execution raises an error after all executions fail or
+the error is not retryable.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="prefect_qiskit.runtime.QuantumRuntime.retry_delay">retry_delay</span></code></td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Standby time in seconds before creating new execution task on failure.
+This setting is applied only if the maximum retry is nonzero.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="prefect_qiskit.runtime.QuantumRuntime.timeout">timeout</span></code></td>
+            <td>
+                  <code><span title="int">int</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Primitive execution timeout in seconds.
+Execution task will raise TaskRunTimeoutError after timeout.
+If the maximum number of reruns has not been reached,
+the error is also suppressed and new execution task is created.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="prefect_qiskit.runtime.QuantumRuntime.execution_cache">execution_cache</span></code></td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Cache primitive execution result in a local file system.
+A cache key is computed from the input Primitive Unified Blocs, options, and resource name.
+Overhead of the primitive operands evaluation is incurred.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <p>Load stored Quantum Runtime and run Qiskit sampler primitive.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">prefect_qiskit.runtime</span><span class="w"> </span><span class="kn">import</span> <span class="n">QuantumRuntime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qiskit.circuit</span><span class="w"> </span><span class="kn">import</span> <span class="n">QuantumCircuit</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qiskit.transpiler.preset_passmanagers</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_preset_pass_manager</span>
+
+<span class="n">runtime</span> <span class="o">=</span> <span class="n">QuantumRuntime</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;BLOCK_NAME&quot;</span><span class="p">)</span>
+
+<span class="n">vqc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">vqc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">vqc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">vqc</span><span class="o">.</span><span class="n">measure_all</span><span class="p">()</span>
+
+<span class="n">pm</span> <span class="o">=</span> <span class="n">generate_preset_pass_manager</span><span class="p">(</span><span class="n">optimization_level</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">runtime</span><span class="o">.</span><span class="n">get_target</span><span class="p">())</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">runtime</span><span class="o">.</span><span class="n">sampler</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">vqc</span><span class="p">]))</span>
+</code></pre></div>
+</details>
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="prefect_qiskit.runtime.QuantumRuntime.async_estimator" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">async_estimator</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">async_estimator</span><span class="p">(</span><span class="n">estimator_pubs</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Asynchronously run estimator primitive.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>estimator_pubs</code>
+            </td>
+            <td>
+                  <code><span title="list">list</span>[<span title="qiskit.primitives.containers.sampler_pub.SamplerPubLike">SamplerPubLike</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Operands of estimator primitive.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>options</code>
+            </td>
+            <td>
+                  <code><span title="dict">dict</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Vendor-specific primitive options.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>tags</code>
+            </td>
+            <td>
+                  <code><span title="list">list</span>[<span title="str">str</span>] | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Arbitrary labels to add to the Primitive task tags of execution.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="qiskit.primitives.PrimitiveResult">PrimitiveResult</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Qiskit PrimitiveResult object.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="prefect_qiskit.runtime.QuantumRuntime.async_get_target" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">async_get_target</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">async_get_target</span><span class="p">()</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Asynchronously get Qiskit Target of specific backend.</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="qiskit.transpiler.Target">Target</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Qiskit Target object.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="prefect_qiskit.runtime.QuantumRuntime.async_sampler" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">async_sampler</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">async_sampler</span><span class="p">(</span><span class="n">sampler_pubs</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Asynchronously run sampler primitive.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>sampler_pubs</code>
+            </td>
+            <td>
+                  <code><span title="list">list</span>[<span title="qiskit.primitives.containers.sampler_pub.SamplerPubLike">SamplerPubLike</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Operands of sampler primitive.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>options</code>
+            </td>
+            <td>
+                  <code><span title="dict">dict</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Vendor-specific primitive options.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>tags</code>
+            </td>
+            <td>
+                  <code><span title="list">list</span>[<span title="str">str</span>] | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Arbitrary labels to add to the Primitive task tags of execution.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="qiskit.primitives.PrimitiveResult">PrimitiveResult</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Qiskit PrimitiveResult object.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="prefect_qiskit.runtime.QuantumRuntime.build_runner_task" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">build_runner_task</span>
+
+
+</h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">build_runner_task</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Build Prefect Task object that runs primitive.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>kwargs</code>
+            </td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Keyword arguments to instantiate Prefect Task.</p>
+              </div>
+            </td>
+            <td>
+                  <code>{}</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="prefect.tasks.Task">Task</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A configured prefect task.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="prefect_qiskit.runtime.QuantumRuntime.estimator" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">estimator</span>
+
+
+</h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">estimator</span><span class="p">(</span><span class="n">estimator_pubs</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Run estimator primitive.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>estimator_pubs</code>
+            </td>
+            <td>
+                  <code><span title="list">list</span>[<span title="qiskit.primitives.containers.estimator_pub.EstimatorPubLike">EstimatorPubLike</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Operands of estimator primitive.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>options</code>
+            </td>
+            <td>
+                  <code><span title="dict">dict</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Vendor-specific primitive options.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>tags</code>
+            </td>
+            <td>
+                  <code><span title="list">list</span>[<span title="str">str</span>] | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Arbitrary labels to add to the Primitive task tags of execution.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="qiskit.primitives.PrimitiveResult">PrimitiveResult</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Qiskit PrimitiveResult object.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="prefect_qiskit.runtime.QuantumRuntime.get_target" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">get_target</span>
+
+
+</h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_target</span><span class="p">()</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Get Qiskit Target of specific backend.</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="qiskit.transpiler.Target">Target</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Qiskit Target object.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="prefect_qiskit.runtime.QuantumRuntime.sampler" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">sampler</span>
+
+
+</h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">sampler</span><span class="p">(</span><span class="n">sampler_pubs</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Run sampler primitive.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>sampler_pubs</code>
+            </td>
+            <td>
+                  <code><span title="list">list</span>[<span title="qiskit.primitives.containers.sampler_pub.SamplerPubLike">SamplerPubLike</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Operands of sampler primitive.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>options</code>
+            </td>
+            <td>
+                  <code><span title="dict">dict</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Vendor-specific primitive options.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>tags</code>
+            </td>
+            <td>
+                  <code><span title="list">list</span>[<span title="str">str</span>] | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Arbitrary labels to add to the Primitive task tags of execution.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="qiskit.primitives.PrimitiveResult">PrimitiveResult</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Qiskit PrimitiveResult object.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="prefect_qiskit.vendors" class="doc doc-heading">
+            <span class="doc doc-object-name doc-module-name">prefect_qiskit.vendors</span>
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+        <p>This module implements credentials for each quantum computing vendor,
+following the Prefect <code>CredentialsBlock</code> structure.
+Users can create and store these credentials on the Prefect server.</p>
+<p>The block must implement the <code>.get_client</code> method,
+which returns a client instance for the vendor-specific API,
+adhering to the <code>AsyncRuntimeClientInterface</code> protocol.
+This client is used by the primitive runner task and is not exposed externally.
+Although users can access the client instance via this method,
+it should be considered a private class and
+may be subject to future API changes without deprecation.</p>
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="prefect_qiskit.vendors.IBMQuantumCredentials" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">IBMQuantumCredentials</span>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="prefect.blocks.abstract.CredentialsBlock">CredentialsBlock</span></code></p>
+
+
+        <p>Block used to manage runtime service authentication with IBM Quantum.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="prefect_qiskit.vendors.IBMQuantumCredentials.api_key">api_key</span></code></td>
+            <td>
+                  <code><span title="pydantic.SecretStr">SecretStr</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>API key to access IBM Quantum Platform.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="prefect_qiskit.vendors.IBMQuantumCredentials.crn">crn</span></code></td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Cloud resource name to identify the service to use.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="prefect_qiskit.vendors.IBMQuantumCredentials.auth_url">auth_url</span></code></td>
+            <td>
+                  <code><span title="pydantic.HttpUrl">HttpUrl</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A custom endpoint URL for IAM authentication.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="prefect_qiskit.vendors.IBMQuantumCredentials.runtime_url">runtime_url</span></code></td>
+            <td>
+                  <code><span title="pydantic.HttpUrl">HttpUrl</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A custom endpoint URL for Qiskit Runtime API.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <p>Load stored IBM Quantum credentials:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">prefect_qiskit.vendors.ibm_quantum</span><span class="w"> </span><span class="kn">import</span> <span class="n">IBMQuantumCredentials</span>
+
+<span class="n">quantum_credentials</span> <span class="o">=</span> <span class="n">IBMQuantumCredentials</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;BLOCK_NAME&quot;</span><span class="p">)</span>
+</code></pre></div>
+</details>
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="prefect_qiskit.vendors.IBMQuantumCredentials.get_client" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">get_client</span>
+
+
+</h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_client</span><span class="p">()</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Get IBM Runtime REST API client.</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="prefect_qiskit.vendors.QiskitAerCredentials" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">QiskitAerCredentials</span>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="prefect.blocks.abstract.CredentialsBlock">CredentialsBlock</span></code></p>
+
+
+        <p>Block used to emulate a runtime with the Qiskit Aer simulator.
+This block provides a virtual system configuration to produce a circuit ISA.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="prefect_qiskit.vendors.QiskitAerCredentials.num_qubits">num_qubits</span></code></td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Number of qubits involved in the simulation.
+The host machine or computing node must have enough memory to represent qubit states,
+otherwise workflow execution may hang up.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="prefect_qiskit.vendors.QiskitAerCredentials.basis_gates">basis_gates</span></code></td>
+            <td>
+                  <code><span title="list">list</span>[<span title="str">str</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A list of quantum gate opcode to form a basis gate set.
+The 'delay', 'measure', and 'reset' instruction are included without being specified here.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="prefect_qiskit.vendors.QiskitAerCredentials.noise">noise</span></code></td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Simulate noise during quantum gate operation.
+The depolarizing error is considered for gates,
+and the assignment error is considered for measurements.
+See the API doc for NoiseModel in Qiskit Aer for more details.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="prefect_qiskit.vendors.QiskitAerCredentials.coupling_map_type">coupling_map_type</span></code></td>
+            <td>
+                  <code><span title="typing.Literal">Literal</span>[&#39;full&#39;, &#39;ring&#39;, &#39;linear&#39;]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Topology of coupling map.
+Actual connections are automatically generated from the selected topology.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <p>Load stored Qiskit Aer credentials:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">prefect_qiskit.vendors.qiskit_aer</span><span class="w"> </span><span class="kn">import</span> <span class="n">QiskitAerCredentials</span>
+
+<span class="n">quantum_credentials</span> <span class="o">=</span> <span class="n">QiskitAerCredentials</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;BLOCK_NAME&quot;</span><span class="p">)</span>
+</code></pre></div>
+</details>
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="prefect_qiskit.vendors.QiskitAerCredentials.get_client" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">get_client</span>
+
+
+</h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_client</span><span class="p">()</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Get a mock runtime client running the Aer simulator.</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="prefect_qiskit.primitives" class="doc doc-heading">
+            <span class="doc doc-object-name doc-module-name">prefect_qiskit.primitives</span>
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+        <p>This module manages the execution of Primitives using Prefect.</p>
+<p>Vendor-specific job handling is encapsulated within Prefect tasks,
+following a common job handling pattern in Prefect.</p>
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="prefect_qiskit.primitives.PrimitiveJob" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">PrimitiveJob</span>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="prefect.blocks.abstract.JobBlock">JobBlock</span></code></p>
+
+
+        <p>Prefect-style definition of a single primitive job.</p>
+<p>Although the job handling logic is backend-agnostic,
+users can provide vendor-specific credentials and execution options
+to communicate with target hardware via the runtime client API.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="prefect_qiskit.primitives.PrimitiveJob.resource_name">resource_name</span></code></td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A target hardware name available with the given credentials.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="prefect_qiskit.primitives.PrimitiveJob.credentials">credentials</span></code></td>
+            <td>
+                  <code><span title="prefect.blocks.abstract.CredentialsBlock">CredentialsBlock</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A vendor specific credentials that provides a runtime client API.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="prefect_qiskit.primitives.PrimitiveJob.primitive_blocs">primitive_blocs</span></code></td>
+            <td>
+                  <code><span title="list">list</span>[<span title="qiskit.primitives.containers.sampler_pub.SamplerPub">SamplerPub</span>] | <span title="list">list</span>[<span title="qiskit.primitives.containers.estimator_pub.EstimatorPub">EstimatorPub</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Canonical Qiskit Primitive Unified Blocs data.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="prefect_qiskit.primitives.PrimitiveJob.options">options</span></code></td>
+            <td>
+                  <code><span title="dict">dict</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A vendor specific execution options for primitives.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="prefect_qiskit.primitives.PrimitiveJob.program_type">program_type</span></code></td>
+            <td>
+                  <code><span title="typing.Literal">Literal</span>[&#39;estimator&#39;, &#39;sampler&#39;]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Reserved primitive name to run on runtime client API.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="prefect_qiskit.primitives.PrimitiveJob.job_watch_poll_interval">job_watch_poll_interval</span></code></td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The amount of time to wait between runtime client API calls during monitoring.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="prefect_qiskit.primitives.PrimitiveJob.trigger" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">trigger</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">trigger</span><span class="p">()</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Triggers a job run in an external service and returns a PrimitiveJobRun object
+to track the execution of the run.</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="prefect_qiskit.primitives.PrimitiveJobRun" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">PrimitiveJobRun</span>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code>, <code><span title="prefect.blocks.abstract.JobRun">JobRun</span></code></p>
+
+
+        <p>A handler of running Primitive Job.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can directly retrieve the result of the job by using Job ID.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">prefect_qiskit.primitives</span><span class="w"> </span><span class="kn">import</span> <span class="n">PrimitiveJobRun</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">prefect_qiskit.vendors.ibm_quantum</span><span class="w"> </span><span class="kn">import</span> <span class="n">IBMQuantumCredentials</span>
+
+<span class="n">job</span> <span class="o">=</span> <span class="n">PrimitiveJobRun</span><span class="p">(</span>
+    <span class="n">job_id</span><span class="o">=</span><span class="s2">&quot;d0a61oqorbds73c39gt0&quot;</span><span class="p">,</span>
+    <span class="n">credentials</span><span class="o">=</span><span class="n">IBMQuantumCredentials</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;my-ibm-client&quot;</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">job</span><span class="o">.</span><span class="n">fetch_result</span><span class="p">()</span>
+</code></pre></div>
+</div>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="prefect_qiskit.primitives.PrimitiveJobRun.job_id">job_id</span></code></td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The unique identifier of the running job.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="prefect_qiskit.primitives.PrimitiveJobRun.job_watch_poll_interval">job_watch_poll_interval</span></code></td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The amount of time to wait between Runtime API calls during monitoring.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="prefect_qiskit.primitives.PrimitiveJobRun.credentials">credentials</span></code></td>
+            <td>
+                  <code><span title="prefect.blocks.abstract.CredentialsBlock">CredentialsBlock</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A vendor specific credentials that provides a runtime client API.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="prefect_qiskit.primitives.PrimitiveJobRun.fetch_metrics" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">fetch_metrics</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">fetch_metrics</span><span class="p">()</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Fetch JobMetrics object from server.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="prefect_qiskit.primitives.PrimitiveJobRun.fetch_result" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">fetch_result</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">fetch_result</span><span class="p">()</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Fetch Qiskit PrimitiveResult object from server.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="prefect_qiskit.primitives.PrimitiveJobRun.wait_for_completion" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">wait_for_completion</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">wait_for_completion</span><span class="p">()</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Asynchronously wait for the job to complete.</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="prefect_qiskit.primitives.run_primitive" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">run_primitive</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">run_primitive</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">primitive_blocs</span><span class="p">,</span> <span class="n">program_type</span><span class="p">,</span> <span class="n">resource_name</span><span class="p">,</span> <span class="n">credentials</span><span class="p">,</span> <span class="n">enable_analytics</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>A core logic to make a primitive job and returns a result.</p>
+<p>This function manages the execution of Qiskit Primitives on an abstract layer,
+providing built-in execution failure protection.</p>
+<p>It accepts PUBs and options, submitting this data to quantum computers via the vendor's API.
+The response is formatted into a Qiskit PrimitiveResult instance.</p>
+<p>If the job is successful and the <code>enable_analytics</code> flag is set,
+the task will analyze job metadata,
+create a job-metrics artifact, and save it on the Prefect server.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>primitive_blocs</code>
+            </td>
+            <td>
+                  <code><span title="list">list</span>[<span title="qiskit.primitives.containers.sampler_pub.SamplerPub">SamplerPub</span>] | <span title="list">list</span>[<span title="qiskit.primitives.containers.estimator_pub.EstimatorPub">EstimatorPub</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Input sampler PUBs.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>program_type</code>
+            </td>
+            <td>
+                  <code><span title="typing.Literal">Literal</span>[&#39;sampler&#39;, &#39;estimator&#39;]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Primitive ID.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>resource_name</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Quantum computing resource.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>credentials</code>
+            </td>
+            <td>
+                  <code><span title="prefect.blocks.abstract.CredentialsBlock">CredentialsBlock</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Runtime API credentials.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>enable_analytics</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Set True to generate table artifact of job metrics.</p>
+              </div>
+            </td>
+            <td>
+                  <code>True</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>options</code>
+            </td>
+            <td>
+                  <code><span title="dict">dict</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Vendor-specific primitive options.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="qiskit.primitives.containers.PrimitiveResult">PrimitiveResult</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Qiskit PrimitiveResult object.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="prefect_qiskit.models" class="doc doc-heading">
+            <span class="doc doc-object-name doc-module-name">prefect_qiskit.models</span>
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+        <p>This module abstracts the runtime client interface and common data structures.</p>
+<p>The Quantum Runtime implementation for Prefect adheres to
+the Qiskit programming model for quantum primitives,
+which is vendor hardware agnostic.</p>
+<p>Primitives utilize Primitive Unified Blocs (PUBs)
+along with an execution options dictionary.
+Execution options can specify a vendor-specific schema
+based on supported features, such as built-in error mitigations.</p>
+<p>This module defines the protocol for API adapters that Prefect primitives can use.
+The protocol does not specify actual communication methods,
+allowing hardware vendors to implement any protocols, such as RESTful or gRPC,
+to interact with their hardware.
+All methods are asynchronous to leverage Prefect's native async support.</p>
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="prefect_qiskit.models.JOB_STATUS" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">JOB_STATUS</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-module-attribute"><code>module-attribute</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">JOB_STATUS</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;QUEUED&#39;</span><span class="p">,</span> <span class="s1">&#39;RUNNING&#39;</span><span class="p">,</span> <span class="s1">&#39;COMPLETED&#39;</span><span class="p">,</span> <span class="s1">&#39;FAILED&#39;</span><span class="p">,</span> <span class="s1">&#39;CANCELLED&#39;</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Reserved status string of runtime job.</p>
+
+    </div>
+
+</div>
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="prefect_qiskit.models.AsyncRuntimeClientInterface" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">AsyncRuntimeClientInterface</span>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="typing.Protocol">Protocol</span></code></p>
+
+
+        <p>Interface abstraction of runtime client API version 1.</p>
+<p>A hardware vendor must provide a credential Block along with its API client
+that implements all the interfaces defined with this protocol.</p>
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="prefect_qiskit.models.AsyncRuntimeClientInterface.check_resource_available" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">check_resource_available</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">check_resource_available</span><span class="p">(</span><span class="n">resource_name</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Asynchronously check whether the target resource is currently available.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>resource_name</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Name of quantum computing resource.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>True when resource is currently available.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="prefect_qiskit.models.AsyncRuntimeClientInterface.get_job_metrics" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">get_job_metrics</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_job_metrics</span><span class="p">(</span><span class="n">job_id</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Asynchronously get metrics of Job.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>job_id</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Unique identifier of the job.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="JobMetrics (prefect_qiskit.models.data.JobMetrics)" href="#prefect_qiskit.models.JobMetrics">JobMetrics</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Execution metrics of the job when available.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="prefect_qiskit.models.AsyncRuntimeClientInterface.get_job_status" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">get_job_status</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_job_status</span><span class="p">(</span><span class="n">job_id</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Asynchronously get status string of Job ID.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function raises error immediately when a job failure occurs.
+A client must inspect whether the job is retriable or not.
+In case the job is retriable, a downstream primitive runner will
+resubmit the same job data to the server.</p>
+</div>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>job_id</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Unique identifier of the job.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="RuntimeJobFailure">RuntimeJobFailure</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>When job execution fails.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="JOB_STATUS
+
+
+  
+      module-attribute
+   (prefect_qiskit.models.interface.JOB_STATUS)" href="#prefect_qiskit.models.JOB_STATUS">JOB_STATUS</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Job status literal.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="prefect_qiskit.models.AsyncRuntimeClientInterface.get_primitive_result" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">get_primitive_result</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_primitive_result</span><span class="p">(</span><span class="n">job_id</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Asynchronously get Qiskit PrimitiveResult object from complete Job ID.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>job_id</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Unique identifier of the job.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="qiskit.primitives.containers.PrimitiveResult">PrimitiveResult</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Qiskit PrimitiveResult object.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="prefect_qiskit.models.AsyncRuntimeClientInterface.get_resources" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">get_resources</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_resources</span><span class="p">()</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Asynchronously list available resource names for this client.</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="list">list</span>[<span title="str">str</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A list of resource names under this account.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="prefect_qiskit.models.AsyncRuntimeClientInterface.get_target" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">get_target</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_target</span><span class="p">(</span><span class="n">resource_name</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Asynchronously get Qiskit Target for a specific computing resource.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>resource_name</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Name of quantum computing resource.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="qiskit.transpiler.target.Target">Target</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Qiskit Target.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="prefect_qiskit.models.AsyncRuntimeClientInterface.run_primitive" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">run_primitive</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">run_primitive</span><span class="p">(</span><span class="n">program_id</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">resource_name</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Asynchronously send Primitive Blocs via Runtime API and return Job ID.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>program_id</code>
+            </td>
+            <td>
+                  <code><span title="typing.Literal">Literal</span>[&#39;sampler&#39;, &#39;estimator&#39;]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Type of primitive to use.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>inputs</code>
+            </td>
+            <td>
+                  <code><span title="list">list</span>[<span title="qiskit.primitives.containers.sampler_pub.SamplerPub">SamplerPub</span>] | <span title="list">list</span>[<span title="qiskit.primitives.containers.estimator_pub.EstimatorPub">EstimatorPub</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Qiskit Pub payloads that the primitive API will digest.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>resource_name</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Name of quantum computing resource.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>options</code>
+            </td>
+            <td>
+                  <code><span title="dict">dict</span>[<span title="str">str</span>, <span title="typing.Any">Any</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Execution options.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Job ID.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="prefect_qiskit.models.JobMetrics" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">JobMetrics</span>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="typing.NamedTuple">NamedTuple</span></code></p>
+
+
+        <p>A canonical job metrics template.
+Vendor can provide following data if available.
+Provided information is consumed by the primitive runner to create a job metrics artifact.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="prefect_qiskit.models.JobMetrics.qpu_usage">qpu_usage</span></code></td>
+            <td>
+                  <code><span title="float">float</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Duration that a quantum processor was actively running.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="prefect_qiskit.models.JobMetrics.timestamp_created">timestamp_created</span></code></td>
+            <td>
+                  <code><span title="datetime.datetime">datetime</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Time when the user job was created in the queue.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="prefect_qiskit.models.JobMetrics.timestamp_started">timestamp_started</span></code></td>
+            <td>
+                  <code><span title="datetime.datetime">datetime</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Time when the execution started on the control server.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="prefect_qiskit.models.JobMetrics.timestamp_completed">timestamp_completed</span></code></td>
+            <td>
+                  <code><span title="datetime.datetime">datetime</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Time when the QPU execution completed on the control server.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="prefect_qiskit.exceptions" class="doc doc-heading">
+            <span class="doc doc-object-name doc-module-name">prefect_qiskit.exceptions</span>
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+        <p>This module defines custom exceptions.</p>
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="prefect_qiskit.exceptions.RuntimeJobFailure" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">RuntimeJobFailure</span>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="Exception">Exception</span></code></p>
+
+
+        <p>A custom exception to enable fine-grained control of Prefect task retries.</p>
+<p>All exceptions raised within the implementation of <code>AsyncRuntimeClientInterface</code>
+must be type cast into this exception. This exception includes a <code>retry</code> flag,
+allowing the Prefect primitive runner to determine
+whether to retry the task upon encountering an exception.</p>
+<p>For instance, if a user creates invalid PUB data,
+the task execution is unlikely to succeed.
+In such cases, the error from PUB validation should be
+type cast into <code>RuntimeJobFailure</code> with <code>retry=False</code>.</p>
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="prefect_qiskit.exceptions.RuntimeJobFailure.__init__" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">__init__</span>
+
+
+</h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__init__</span><span class="p">(</span><span class="nf">reason</span><span class="p">,</span> <span class="n">job_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">error_code</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">retry</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Define exception.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>reason</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A human readable explanation of the failure.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>job_id</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Failed Job ID.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>error_code</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Vendor-specific error code.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>retry</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Either retry the primitive execution or not.</p>
+              </div>
+            </td>
+            <td>
+                  <code>True</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.annotate", "search.highlight", "search.suggest", "navigation.instant", "navigation.tabs", "navigation.top", "navigation.sections", "toc.integrate"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
