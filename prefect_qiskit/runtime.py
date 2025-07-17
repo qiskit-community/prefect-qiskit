@@ -23,10 +23,10 @@ Users must supply Prefect credential blocks for the specific vendor to run on th
 import asyncio
 from collections.abc import Callable
 
-import nest_asyncio
 from prefect._internal.compatibility.async_dispatch import async_dispatch
 from prefect.blocks.core import Block
 from prefect.cache_policies import NO_CACHE, CacheKeyFnPolicy
+from prefect.utilities.asyncutils import run_coro_as_sync
 from pydantic import Field, model_validator
 from qiskit.primitives import PrimitiveResult
 from qiskit.primitives.containers.estimator_pub import EstimatorPub, EstimatorPubLike
@@ -38,15 +38,6 @@ from prefect_qiskit.models import AsyncRuntimeClientInterface
 from prefect_qiskit.primitives.runner import run_primitive
 from prefect_qiskit.utils.pub_hasher import pub_hasher
 from prefect_qiskit.vendors import QiskitAerCredentials, QuantumCredentialsT
-
-# Need for execution environment with a running event loop, such as Jupyter notebook.
-# QuantumRuntime.check_resource calls an asynchronous API method from the synchronous context.
-# Because we cannot await inside a synchronous context, the coroutine must be
-# executed with asyncio.run to get the return values.
-# However, asyncio.run creates a new event loop, which is not allowed by asyncio by design.
-# The nest_asyncio allows creating new event loop on top of the running loop.
-nest_asyncio.apply()
-
 
 # A prefix of cached result file name when the cache mode is enabled.
 CACHE_PREFIX = "qiskit-primitive-"
@@ -181,11 +172,7 @@ class QuantumRuntime(Block):
     def check_resource(self) -> Self:
         client: AsyncRuntimeClientInterface = self.credentials.get_client()
 
-        coro = client.get_resources()
-        try:
-            allowed_list = asyncio.get_running_loop().run_until_complete(coro)
-        except RuntimeError:
-            allowed_list = asyncio.run(coro)
+        allowed_list = run_coro_as_sync(client.get_resources())
         if self.resource_name not in allowed_list:
             raise ValueError(
                 f"Resource name {self.resource_name} is not available under your account. "

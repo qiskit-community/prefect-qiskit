@@ -38,7 +38,6 @@ dependencies = [
     "prefect",
     "qiskit>=2.1",
     "aiohttp",
-    "nest-asyncio",
     "typing_extensions",
     # vendor: IBM
     "ibm_cloud_sdk_core",
