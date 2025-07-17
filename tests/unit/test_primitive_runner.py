@@ -24,7 +24,7 @@ from qiskit import QuantumCircuit
 
 from prefect_qiskit.exceptions import RuntimeJobFailure
 from prefect_qiskit.models import JobMetrics
-from prefect_qiskit.primitives.runner import run_primitive
+from prefect_qiskit.runtime import QuantumRuntime
 from prefect_qiskit.vendors.qiskit_aer import QiskitAerCredentials
 from prefect_qiskit.vendors.qiskit_aer.client import QiskitAerClient
 
@@ -52,15 +52,17 @@ async def test_retry_until_success(
     )
 
     # API will intentionally fail once
-    result = await run_primitive.with_options(
-        retries=2,
-        retry_delay_seconds=1,
-    )(
-        primitive_blocs=[bell_circuit_pub],
-        program_type="sampler",
+    runner_task = QuantumRuntime(
         resource_name="aer_simulator",
         credentials=aer_credentials_2q,
-        enable_analytics=False,
+        enable_job_analytics=False,
+        max_retry=2,
+        retry_delay=1,
+    ).build_runner_task()
+
+    result = await runner_task(
+        primitive_blocs=[bell_circuit_pub],
+        program_type="sampler",
     )
 
     assert result[0].data.meas.get_counts() == {"00": 512, "11": 512}
@@ -89,16 +91,18 @@ async def test_unretryable(
         side_effect=RuntimeJobFailure("unretryable failure", job_id="test_job_123", retry=False),
     )
 
+    runner_task = QuantumRuntime(
+        resource_name="aer_simulator",
+        credentials=aer_credentials_2q,
+        enable_job_analytics=False,
+        max_retry=2,
+        retry_delay=1,
+    ).build_runner_task()
+
     with pytest.raises(RuntimeJobFailure):
-        await run_primitive.with_options(
-            retries=2,
-            retry_delay_seconds=1,
-        )(
+        await runner_task(
             primitive_blocs=[bell_circuit_pub],
             program_type="sampler",
-            resource_name="aer_simulator",
-            credentials=aer_credentials_2q,
-            enable_analytics=False,
         )
 
     # Don't submit unretryable job more than once
@@ -123,16 +127,18 @@ async def test_not_infinite_loop(
         side_effect=RuntimeJobFailure("retryable failure", job_id="test_job_123", retry=True),
     )
 
+    runner_task = QuantumRuntime(
+        resource_name="aer_simulator",
+        credentials=aer_credentials_2q,
+        enable_job_analytics=False,
+        max_retry=2,
+        retry_delay=1,
+    ).build_runner_task()
+
     with pytest.raises(RuntimeJobFailure):
-        await run_primitive.with_options(
-            retries=2,
-            retry_delay_seconds=1,
-        )(
+        await runner_task(
             primitive_blocs=[bell_circuit_pub],
             program_type="sampler",
-            resource_name="aer_simulator",
-            credentials=aer_credentials_2q,
-            enable_analytics=False,
         )
 
     # Retry until retry limit
@@ -160,16 +166,18 @@ async def test_retry_on_task_timeout(
         side_effect=lambda _: "COMPLETED" if time.time() - test_start > 10 else "QUEUED",
     )
 
-    result = await run_primitive.with_options(
-        retries=2,
-        retry_delay_seconds=0,
-        timeout_seconds=6,
-    )(
-        primitive_blocs=[bell_circuit_pub],
-        program_type="sampler",
+    runner_task = QuantumRuntime(
         resource_name="aer_simulator",
         credentials=aer_credentials_2q,
-        enable_analytics=False,
+        enable_job_analytics=False,
+        max_retry=2,
+        retry_delay=0,
+        timeout=6,
+    ).build_runner_task()
+
+    result = await runner_task(
+        primitive_blocs=[bell_circuit_pub],
+        program_type="sampler",
     )
 
     assert result[0].data.meas.get_counts() == {"00": 512, "11": 512}
@@ -213,15 +221,18 @@ async def test_job_metrics(
         ),
     )
 
-    await run_primitive.with_options(
-        task_run_name="test_job_metrics",
-        tags=["tag1", "tag2"],
-    )(
-        primitive_blocs=[bell_circuit_pub],
-        program_type="sampler",
+    runner_task = QuantumRuntime(
         resource_name="aer_simulator",
         credentials=aer_credentials_2q,
-        enable_analytics=True,
+        enable_job_analytics=True,
+    ).build_runner_task(
+        task_run_name="test_job_metrics",
+        tags=["tag1", "tag2"],
+    )
+
+    await runner_task(
+        primitive_blocs=[bell_circuit_pub],
+        program_type="sampler",
         options=test_options,
     )
 
