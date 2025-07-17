@@ -178,7 +178,7 @@ def test_sampler_e2e(
         "program_type": "sampler",
         "num_pubs": 1,
         "job_id": "test-job-id-123",
-        "tags": ["primitive-execute"],
+        "tags": [],
         "timestamp.created": ANY,
         "timestamp.started": ANY,
         "timestamp.completed": ANY,

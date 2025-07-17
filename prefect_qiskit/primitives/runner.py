@@ -13,7 +13,6 @@
 
 from typing import Literal
 
-from prefect import task
 from prefect.artifacts import create_table_artifact
 from prefect.blocks.abstract import CredentialsBlock
 from prefect.context import TaskRunContext
@@ -26,6 +25,9 @@ from qiskit.primitives.containers.sampler_pub import SamplerPub
 from prefect_qiskit.exceptions import RuntimeJobFailure
 from prefect_qiskit.models import JobMetrics
 from prefect_qiskit.primitives.job import PrimitiveJob
+
+# TODO integration of metrics database
+# TODO automatic job split (workflow optimization)
 
 
 async def retry_on_failure(_task, _task_run, state):
@@ -41,14 +43,6 @@ async def retry_on_failure(_task, _task_run, state):
         return False
 
 
-# TODO integration of metrics database
-# TODO automatic job split (workflow optimization)
-
-
-@task(
-    name="run_primitive",
-    retry_condition_fn=retry_on_failure,
-)
 async def run_primitive(
     *,
     primitive_blocs: list[SamplerPub] | list[EstimatorPub],
@@ -58,9 +52,9 @@ async def run_primitive(
     enable_analytics: bool = True,
     options: dict | None = None,
 ) -> PrimitiveResult:
-    """
-    This function implements a Prefect task to manage the execution of
-    Qiskit Primitives on an abstract layer,
+    """A core logic to make a primitive job and returns a result.
+
+    This function manages the execution of Qiskit Primitives on an abstract layer,
     providing built-in execution failure protection.
 
     It accepts PUBs and options, submitting this data to quantum computers via the vendor's API.

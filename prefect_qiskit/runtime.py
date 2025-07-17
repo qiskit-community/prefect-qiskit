@@ -21,11 +21,12 @@ Users must supply Prefect credential blocks for the specific vendor to run on th
 """
 
 import asyncio
-from collections.abc import Callable
+from functools import partial
 
 from prefect._internal.compatibility.async_dispatch import async_dispatch
 from prefect.blocks.core import Block
 from prefect.cache_policies import NO_CACHE, CacheKeyFnPolicy
+from prefect.tasks import Task
 from prefect.utilities.asyncutils import run_coro_as_sync
 from pydantic import Field, model_validator
 from qiskit.primitives import PrimitiveResult
@@ -35,7 +36,7 @@ from qiskit.transpiler import Target
 from typing_extensions import Self
 
 from prefect_qiskit.models import AsyncRuntimeClientInterface
-from prefect_qiskit.primitives.runner import run_primitive
+from prefect_qiskit.primitives.runner import retry_on_failure, run_primitive
 from prefect_qiskit.utils.pub_hasher import pub_hasher
 from prefect_qiskit.vendors import QiskitAerCredentials, QuantumCredentialsT
 
@@ -218,14 +219,11 @@ class QuantumRuntime(Block):
         Returns:
             Qiskit PrimitiveResult object.
         """
-        opted_run_primitive = self._setup_runner(tags=tags)
+        opted_run_primitive = self.build_runner_task(tags=tags)
 
         return await opted_run_primitive(
             primitive_blocs=list(map(SamplerPub.coerce, sampler_pubs)),
             program_type="sampler",
-            resource_name=self.resource_name,
-            credentials=self.credentials,
-            enable_analytics=self.enable_job_analytics,
             options=options,
         )
 
@@ -246,14 +244,11 @@ class QuantumRuntime(Block):
         Returns:
             Qiskit PrimitiveResult object.
         """
-        opted_run_primitive = self._setup_runner(tags=tags)
+        opted_run_primitive = self.build_runner_task(tags=tags)
 
         coro = opted_run_primitive(
             primitive_blocs=list(map(SamplerPub.coerce, sampler_pubs)),
             program_type="sampler",
-            resource_name=self.resource_name,
-            credentials=self.credentials,
-            enable_analytics=self.enable_job_analytics,
             options=options,
         )
         return asyncio.run(coro)
@@ -274,14 +269,11 @@ class QuantumRuntime(Block):
         Returns:
             Qiskit PrimitiveResult object.
         """
-        opted_run_primitive = self._setup_runner(tags=tags)
+        opted_run_primitive = self.build_runner_task(tags=tags)
 
         return await opted_run_primitive(
             primitive_blocs=list(map(EstimatorPub.coerce, estimator_pubs)),
             program_type="estimator",
-            resource_name=self.resource_name,
-            credentials=self.credentials,
-            enable_analytics=self.enable_job_analytics,
             options=options,
         )
 
@@ -302,51 +294,59 @@ class QuantumRuntime(Block):
         Returns:
             Qiskit PrimitiveResult object.
         """
-        opted_run_primitive = self._setup_runner(tags=tags)
+        opted_run_primitive = self.build_runner_task(tags=tags)
 
         coro = opted_run_primitive(
             primitive_blocs=list(map(EstimatorPub.coerce, estimator_pubs)),
             program_type="estimator",
-            resource_name=self.resource_name,
-            credentials=self.credentials,
-            enable_analytics=self.enable_job_analytics,
             options=options,
         )
         return asyncio.run(coro)
 
-    def _setup_runner(
+    def build_runner_task(
         self,
-        tags: list[str] | None = None,
-    ) -> Callable:
-        """A helper function to setup a primitive runner.
+        **kwargs,
+    ) -> Task:
+        """Build Prefect Task object that runs primitive.
 
         Args:
-            tags: Arbitrary labels to add to the Primitive task tags of execution.
+            kwargs: Keyword arguments to instantiate Prefect Task.
 
         Returns:
-            A primitive runner callable with configured task options.
+            A configured prefect task.
         """
-        if self.execution_cache:
-            task_options = {
-                "cache_policy": CacheKeyFnPolicy(cache_key_fn=_primitive_cache),
-                "persist_result": True,
-                "result_serializer": "compressed/pickle",
-            }
-        else:
-            task_options = {
-                "cache_policy": NO_CACHE,
-                "persist_result": False,
-            }
-        task_options.update(
-            {
-                "retries": self.max_retry,
-                "retry_delay_seconds": self.retry_delay,
-                "timeout_seconds": self.timeout,
-                "tags": tags or ["primitive-execute"],
-            }
+        configured_runner = partial(
+            run_primitive,
+            resource_name=self.resource_name,
+            credentials=self.credentials,
+            enable_analytics=self.enable_job_analytics,
         )
 
-        return run_primitive.with_options(**task_options)
+        if self.execution_cache:
+            kwargs.update(
+                {
+                    "cache_policy": CacheKeyFnPolicy(cache_key_fn=_primitive_cache),
+                    "persist_result": True,
+                    "result_serializer": "compressed/pickle",
+                }
+            )
+        else:
+            kwargs.update(
+                {
+                    "cache_policy": NO_CACHE,
+                    "persist_result": False,
+                }
+            )
+
+        return Task(
+            fn=configured_runner,
+            name="run_primitive",
+            retries=self.max_retry,
+            retry_delay_seconds=self.retry_delay,
+            timeout_seconds=self.timeout,
+            retry_condition_fn=retry_on_failure,
+            **kwargs,
+        )
 
 
 def _primitive_cache(_, parameters) -> str:
